@@ -45,6 +45,30 @@ public class Presenter {
         System.out.println("El 20 existe? " + tree.exist(20));
         System.out.println("el 100 existe? " + tree.exist(100));
 
+        System.out.println(tree.inOrder());
+
+        System.out.println("Eliminando el 1");
+        tree.remove(1);
+        System.out.println("El 1 existe? " + tree.exist(1));
+
+        System.out.println("Eliminando el 30");
+        tree.remove(30);
+        System.out.println("El 30 existe? " + tree.exist(30));
+
+        System.out.println(tree.inOrder());
+
+        System.out.println("Eliminando el 5");
+        tree.remove(5);
+        System.out.println("El 5 existe? " + tree.exist(5));
+
+        System.out.println(tree.inOrder());
+
+        System.out.println("Eliminando el 20");
+        tree.remove(20);
+        System.out.println("El 20 existe? " + tree.exist(20));
+
+        System.out.println(tree.inOrder());
+
         Student student1 = new Student(1, "Juan", 20);
         Student student2 = new Student(2, "Pedro", 30);
         Student student3 = new Student(3, "Maria", 25);

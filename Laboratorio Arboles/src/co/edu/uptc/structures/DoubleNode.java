@@ -13,6 +13,10 @@ public class DoubleNode<T> {
         return data;
     }
 
+    public void setData(T data) {
+        this.data = data;
+    }
+
     public DoubleNode<T> getLeft() {
         return left;
     }

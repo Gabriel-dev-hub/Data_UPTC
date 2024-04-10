@@ -57,42 +57,29 @@ public class Presenter {
             option = view.readInt("Ingrese una opción:");
             switch (option) {
                 case 1:
-                    insertInEnglishDictionary();
+                    insertInDictionary(Language.ENGLISH);
                     break;
                 case 2:
-                    searchInEnglishDictionary();
+                    searchInDictionary(Language.ENGLISH);
                     break;
                 case 3:
                     myDictionary.showDictionary(Language.ENGLISH).forEach(word -> view.showMessage(word.toString()));
                     break;
                 case 4:
-                    view.showMessage("El diccionario inglés tiene: " + myDictionary.calculateSizeOfDictionary(Language.ENGLISH) + " palabras");
+                    view.showMessage("El diccionario inglés tiene: "
+                            + myDictionary.calculateSizeOfDictionary(Language.ENGLISH) + " palabras");
                     break;
                 case 5:
+                    deleteInDictionary(Language.ENGLISH);
+                    break;
+                case 6:
                     view.showMessage("Saliendo al menú principal...");
                     break;
                 default:
                     view.showMessage("Opción no válida");
                     break;
             }
-        } while (option != 5);
-    }
-
-    public void insertInEnglishDictionary() {
-        String originalWord = view.readString("Ingrese la palabra en Español:");
-        String traduction = view.readString("Ingrese la traducción de la palabra:");
-        Word word = new Word(originalWord, traduction);
-        myDictionary.insertWordInDictionary(word, Language.ENGLISH);
-    }
-
-    public void searchInEnglishDictionary() {
-        String originalWord = view.readString("Ingrese la palabra a buscar en español:");
-        Word word = myDictionary.searchInDictionary(originalWord, Language.ENGLISH);
-        if (word != null) {
-            view.showMessage("Traducción: " + word.getTraduction());
-        } else {
-            view.showMessage("La palabra no existe en el diccionario");
-        }
+        } while (option != 6);
     }
 
     public void showFrenchMenu() {
@@ -103,42 +90,51 @@ public class Presenter {
             option = view.readInt("Ingrese una opción:");
             switch (option) {
                 case 1:
-                    insertInFrenchDictionary();
+                    insertInDictionary(Language.FRENCH);
                     break;
                 case 2:
-                    searchInFrenchDictionary();
+                    searchInDictionary(Language.FRENCH);
                     break;
                 case 3:
                     myDictionary.showDictionary(Language.FRENCH).forEach(word -> view.showMessage(word.toString()));
                     break;
                 case 4:
-                    view.showMessage("El diccionario francés tiene: " + myDictionary.calculateSizeOfDictionary(Language.FRENCH) + " palabras");
+                    view.showMessage("El diccionario francés tiene: "
+                            + myDictionary.calculateSizeOfDictionary(Language.FRENCH) + " palabras");
                     break;
                 case 5:
+                    deleteInDictionary(Language.FRENCH);
+                    break;
+                case 6:
                     view.showMessage("Saliendo al menú principal...");
                     break;
                 default:
                     view.showMessage("Opción no válida");
                     break;
             }
-        } while (option != 5);
+        } while (option != 6);
     }
 
-    public void insertInFrenchDictionary() {
+    public void insertInDictionary(Language language) {
         String originalWord = view.readString("Ingrese la palabra en Español:");
         String traduction = view.readString("Ingrese la traducción de la palabra:");
         Word word = new Word(originalWord, traduction);
-        myDictionary.insertWordInDictionary(word, Language.FRENCH);
+        myDictionary.insertWordInDictionary(word, language);
     }
 
-    public void searchInFrenchDictionary() {
+    public void searchInDictionary(Language language) {
         String originalWord = view.readString("Ingrese la palabra a buscar en español:");
-        Word word = myDictionary.searchInDictionary(originalWord, Language.FRENCH);
+        Word word = myDictionary.searchInDictionary(originalWord, language);
         if (word != null) {
             view.showMessage("Traducción: " + word.getTraduction());
         } else {
             view.showMessage("La palabra no existe en el diccionario");
         }
+    }
+
+    public void deleteInDictionary(Language language) {
+        String originalWord = view.readString("Ingrese la palabra a eliminar en español:");
+        myDictionary.deleteWordInDictionary(originalWord, language);
     }
 
     public static void main(String[] args) {

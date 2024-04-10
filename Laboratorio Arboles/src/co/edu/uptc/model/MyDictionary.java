@@ -50,4 +50,12 @@ public class MyDictionary {
         }
         return size;
     }
+
+    public void deleteWordInDictionary(String originalWord, Language language) {
+        if (language == Language.ENGLISH) {
+            englishTree.remove(new Word(originalWord, ""));
+        } else if (language == Language.FRENCH) {
+            frenchTree.remove(new Word(originalWord, ""));
+        }
+    }
 }

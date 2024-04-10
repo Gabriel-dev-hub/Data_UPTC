@@ -30,7 +30,7 @@ public class BinaryTree<T> {
         if (comparator.compare(node.getData(), value) == 0) {
             return;
         }
-    
+
         if (comparator.compare(node.getData(), value) > 0) {
             if (node.getLeft() == null) {
                 node.setLeft(new DoubleNode<>(value));
@@ -126,5 +126,47 @@ public class BinaryTree<T> {
             list.add(node.getData());
         }
         return list;
+    }
+
+    public void remove(T value) {
+        root = remove(value, root);
+    }
+
+    public DoubleNode<T> remove(T value, DoubleNode<T> node) {
+        DoubleNode<T> aux = node;
+        if (node == null) {
+            throw new RuntimeException("El valor no exíste en el arbol");
+        }
+
+        if (comparator.compare(node.getData(), value) == 0) {
+            if (node.getLeft() == null && node.getRight() == null) {
+                aux = null;
+            } else if (node.getLeft() == null) {
+                aux = node.getRight();
+            } else if (node.getRight() == null) {
+                aux = node.getLeft();
+            } else {
+                T smallestValue = findSmallestValue(node.getRight());
+                node.setData(smallestValue);
+                node.setRight(remove(smallestValue, node.getRight()));
+            }
+            
+        } else if (comparator.compare(node.getData(), value) > 0) {
+            DoubleNode<T> left = remove(value, node.getLeft());
+            node.setLeft(left);
+        } else {
+            DoubleNode<T> right = remove(value, node.getRight());
+            node.setRight(right);
+        }
+        return aux;
+    }
+    
+
+    private T findSmallestValue(DoubleNode<T> node) {
+        T smallestValue = node.getData();
+        if (node.getLeft() != null) {
+            smallestValue = findSmallestValue(node.getLeft());
+        }
+        return smallestValue;
     }
 }
