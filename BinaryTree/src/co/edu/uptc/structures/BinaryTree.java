@@ -161,7 +161,6 @@ public class BinaryTree<T> {
         return aux;
     }
     
-
     private T findSmallestValue(DoubleNode<T> node) {
         T smallestValue = node.getData();
         if (node.getLeft() != null) {

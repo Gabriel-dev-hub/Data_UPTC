@@ -10,7 +10,7 @@ public class Presenter {
     public Presenter() {
 
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         
         // Expresion lambda:
         BinaryTree<Integer> tree = new BinaryTree<>((a, b) -> a - b);
@@ -41,21 +41,19 @@ public class Presenter {
         tree.insert(2);
         tree.insert(1);
 
+        System.out.println(tree.preOrder());
+
         System.out.println("El arbol está vacío? " + tree.isEmpty());
         System.out.println("El 20 existe? " + tree.exist(20));
         System.out.println("el 100 existe? " + tree.exist(100));
 
         System.out.println(tree.inOrder());
 
-        System.out.println("Eliminando el 1");
-        tree.remove(1);
-        System.out.println("El 1 existe? " + tree.exist(1));
+        System.out.println("Eliminando el 10");
+        tree.remove(10);
+        System.out.println("El 10 existe? " + tree.exist(10));
 
-        System.out.println("Eliminando el 30");
-        tree.remove(30);
-        System.out.println("El 30 existe? " + tree.exist(30));
-
-        System.out.println(tree.inOrder());
+        System.out.println(tree.preOrder());
 
         System.out.println("Eliminando el 5");
         tree.remove(5);
