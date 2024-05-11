@@ -15,7 +15,7 @@ public class MyDictionary {
         frenchTree = new BinaryTree<>(wordComparator);
     }
 
-    public void insertWordInDictionary(Word word, Language language) {
+    public synchronized void insertWordInDictionary(Word word, Language language) {
         if (language == Language.ENGLISH) {
             englishTree.insert(word);
         } else if (language == Language.FRENCH) {
@@ -23,7 +23,7 @@ public class MyDictionary {
         }
     }
 
-    public Word searchInDictionary(String originalWord, Language language) {
+    public synchronized Word searchInDictionary(String originalWord, Language language) {
         Word word = null;
         if (language == Language.ENGLISH) {
             word = englishTree.search(new Word(originalWord, ""));
@@ -33,7 +33,7 @@ public class MyDictionary {
         return word;
     }
 
-    public List<Word> showDictionary(Language language) {
+    public synchronized List<Word> showDictionary(Language language) {
         List<Word> list = null;
         if (language == Language.ENGLISH) {
             list = englishTree.inOrder();
@@ -43,7 +43,7 @@ public class MyDictionary {
         return list;
     }
 
-    public int calculateSizeOfDictionary(Language language) {
+    public synchronized int calculateSizeOfDictionary(Language language) {
         int size = 0;
         for (Word word : showDictionary(language)) {
             size++;
@@ -51,15 +51,11 @@ public class MyDictionary {
         return size;
     }
 
-    public void deleteWordInDictionary(String originalWord, Language language) {
-        try {
-            if (language == Language.ENGLISH) {
-                englishTree.remove(new Word(originalWord, ""));
-            } else if (language == Language.FRENCH) {
-                frenchTree.remove(new Word(originalWord, ""));
-            }  
-        } catch (Exception e) {
-            e.getMessage();
+    public synchronized void deleteWordInDictionary(String originalWord, Language language) {
+        if (language == Language.ENGLISH) {
+            englishTree.remove(new Word(originalWord, ""));
+        } else if (language == Language.FRENCH) {
+            frenchTree.remove(new Word(originalWord, ""));
         }
     }
 }

@@ -133,8 +133,12 @@ public class Presenter {
     }
 
     public void deleteInDictionary(Language language) {
-        String originalWord = view.readString("Ingrese la palabra a eliminar en español:");
-        myDictionary.deleteWordInDictionary(originalWord, language);
+        try {
+            String originalWord = view.readString("Ingrese la palabra a eliminar en español:");
+            myDictionary.deleteWordInDictionary(originalWord, language);
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 
     public static void main(String[] args) {
